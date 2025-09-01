@@ -12,6 +12,7 @@ The ER diagram includes the following entities:
 - **Payment**: Payment transactions for bookings
 - **Review**: User reviews and ratings for properties
 - **Message**: Communication between users
+- 
 
 ## Tools Used
 This ER diagram was created using **Draw.io** (diagrams.net), a free online diagramming tool.
