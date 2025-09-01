@@ -158,6 +158,239 @@ Additional reusable components (to be created later) may include:
 
 
 
+## Team Roles
+
+In this project, each team member has a defined role to ensure smooth collaboration and efficient development. Below are the key roles and their responsibilities:
+
+### 1. Backend Developer
+Responsible for building and maintaining the server-side logic of the application. They design APIs, handle authentication, manage data flow between the client and server, and ensure the app is secure and scalable.
+
+### 2. Frontend Developer
+Focuses on the user interface and user experience (UI/UX). They implement responsive designs, connect to APIs, and ensure the application is interactive, accessible, and visually appealing.
+
+### 3. Database Administrator (DBA)
+Manages the database system used by the project. They are responsible for database design, performance optimization, backups, recovery, and ensuring data integrity and security.
+
+### 4. DevOps Engineer
+Ensures smooth deployment and continuous integration/continuous delivery (CI/CD). They handle server configuration, version control, monitoring, and automate workflows for efficient development and deployment.
+
+### 5. UI/UX Designer
+Designs the application’s user interface and overall experience. They create wireframes, prototypes, and style guides to ensure usability, accessibility, and visual consistency.
+
+### 6. Project Manager (PM)
+Coordinates the team’s efforts and ensures deadlines are met. They handle planning, task assignment, communication, and track progress to make sure the project aligns with goals.
+
+### 7. QA Engineer (Tester)
+Ensures the quality of the project by writing and executing test cases. They detect bugs, verify functionality, and confirm that features meet requirements before deployment.
+
+### 8. Product Owner
+Defines the vision of the product and sets priorities. They ensure that the final deliverable meets business goals and customer needs, acting as the link between stakeholders and the development team.
+
+
+
+
+
+## Technology Stack
+
+This project leverages modern technologies to replicate core Airbnb functionality. Each technology plays a critical role in ensuring the system is scalable, reliable, and user-friendly.
+
+### 1. Django
+A high-level Python web framework used to build the backend of the application. It provides a structured way to create RESTful APIs, handle authentication, manage user sessions, and implement business logic.
+
+### 2. PostgreSQL
+An open-source relational database system used for storing structured data such as user accounts, property listings, reservations, and reviews. It ensures data integrity and supports complex queries.
+
+### 3. GraphQL
+A query language for APIs that allows clients to request exactly the data they need. It improves efficiency compared to traditional REST by reducing over-fetching and under-fetching of data.
+
+### 4. React
+A JavaScript library used to build the frontend of the application. React enables the creation of reusable UI components, provides a responsive user experience, and connects to the backend APIs.
+
+### 5. Docker
+A containerization tool that allows the application to run in isolated environments. Docker ensures consistency across development, testing, and production environments.
+
+### 6. Nginx
+A web server and reverse proxy used for serving static files, load balancing, and directing traffic between the client and backend services.
+
+### 7. Git & GitHub
+Version control tools used for collaborative development, code tracking, and project management. GitHub also serves as the remote repository for the project.
+
+### 8. Redis (Optional – if used)
+An in-memory data store used for caching and session management. It helps speed up repeated queries and improves overall application performance.
+
+
+
+
+## Database Design
+
+The database is designed to capture the core functionality of the Airbnb clone. Below are the key entities, their important fields, and the relationships between them.
+
+### 1. Users
+Represents the people using the platform (both guests and hosts).
+- **id**: unique identifier for each user  
+- **name**: full name of the user  
+- **email**: unique email address  
+- **password**: hashed password for authentication  
+- **role**: defines if the user is a guest, host, or admin  
+
+**Relationships**:  
+- A user can list multiple properties.  
+- A user can make multiple bookings.  
+- A user can leave multiple reviews.  
+
+---
+
+### 2. Properties
+Represents the listings available for rent.
+- **id**: unique identifier for each property  
+- **host_id**: references the user who listed the property  
+- **title**: property title (e.g., “Cozy Apartment in Addis Ababa”)  
+- **location**: address or city  
+- **price_per_night**: cost of staying per night  
+
+**Relationships**:  
+- A property belongs to one host (user).  
+- A property can have multiple bookings.  
+- A property can receive multiple reviews.  
+
+---
+
+### 3. Bookings
+Represents reservations made by guests.
+- **id**: unique identifier for each booking  
+- **user_id**: references the guest making the booking  
+- **property_id**: references the property being booked  
+- **start_date**: check-in date  
+- **end_date**: check-out date  
+
+**Relationships**:  
+- A booking belongs to one guest (user).  
+- A booking belongs to one property.  
+- A booking can have one payment.  
+
+---
+
+### 4. Reviews
+Represents feedback from guests about properties.
+- **id**: unique identifier for each review  
+- **user_id**: references the guest who wrote the review  
+- **property_id**: references the reviewed property  
+- **rating**: numerical score (e.g., 1–5 stars)  
+- **comment**: text feedback  
+
+**Relationships**:  
+- A review belongs to one user (guest).  
+- A review belongs to one property.  
+
+---
+
+### 5. Payments
+Represents transactions for bookings.
+- **id**: unique identifier for each payment  
+- **booking_id**: references the associated booking  
+- **amount**: payment amount  
+- **status**: status of payment (pending, completed, failed)  
+- **method**: payment method (credit card, PayPal, etc.)  
+
+**Relationships**:  
+- A payment is linked to exactly one booking.  
+
+---
+
+### Entity Relationships (Summary)
+- A **User** can be both a host (list properties) and a guest (make bookings).  
+- A **Property** belongs to one host but can have many bookings and reviews.  
+- A **Booking** links a guest to a property and can have one payment.  
+- A **Review** connects a guest with a property.  
+- A **Payment** is tied to a single booking.  
+
+
+
+
+
+
+## Feature Breakdown
+
+The Airbnb Clone project is built around core features that replicate real-world functionality of Airbnb. Each feature ensures a smooth user experience for both guests and hosts.
+
+### 1. User Management
+Users can sign up, log in, and manage their profiles. This feature ensures authentication, authorization, and role management (guests, hosts, and admins) to provide secure access across the platform.
+
+### 2. Property Management
+Hosts can list their properties by adding details such as title, description, location, photos, and price per night. This feature enables property owners to showcase their listings and make them available for bookings.
+
+### 3. Booking System
+Guests can view property availability and make reservations for their preferred dates. The booking system manages conflicts, validates availability, and ensures that reservations are linked to both the user and the property.
+
+### 4. Review System
+Guests can leave reviews and ratings for properties they have stayed in. This feature helps future guests make informed decisions while encouraging hosts to maintain high-quality listings.
+
+### 5. Payment Integration
+The platform supports secure payment processing for confirmed bookings. This ensures a smooth financial transaction between guests and hosts, with statuses such as pending, completed, or failed.
+
+### 6. Search and Filtering
+Guests can search for properties using filters such as location, price range, availability, and ratings. This feature makes it easier to find suitable listings quickly and efficiently.
+
+### 7. Admin Dashboard
+Admins have tools to monitor platform activity, manage users, handle reported properties, and ensure compliance with platform policies. This feature maintains the integrity and security of the platform.
+
+
+
+
+## API Security
+
+Securing the backend APIs is critical to ensure user trust, protect sensitive information, and maintain the integrity of the platform. The following security measures will be implemented in the project:
+
+### 1. Authentication
+Only registered users should be able to access protected resources. Authentication (e.g., JWT tokens or OAuth) ensures that each request is tied to a verified identity.  
+**Why it matters:** Protects user accounts and prevents unauthorized access to the system.
+
+### 2. Authorization
+Different users (guests, hosts, admins) have different permissions. Authorization ensures that users can only perform actions they are allowed to, such as a host editing their own property but not another host’s.  
+**Why it matters:** Prevents privilege misuse and enforces role-based access control.
+
+### 3. Data Encryption
+Sensitive data such as passwords and payment details will be encrypted both in transit (using HTTPS/TLS) and at rest (using hashing and encryption techniques).  
+**Why it matters:** Protects confidential information from being intercepted or exposed.
+
+### 4. Rate Limiting & Throttling
+APIs will implement rate limiting to prevent abuse, brute force attacks, or denial-of-service attempts.  
+**Why it matters:** Ensures system stability and prevents malicious overloads.
+
+### 5. Input Validation & Sanitization
+All incoming requests will be validated and sanitized to protect against SQL injection, XSS, and other injection attacks.  
+**Why it matters:** Maintains data integrity and prevents attackers from manipulating the database or application logic.
+
+### 6. Secure Payments
+Integration with trusted third-party payment gateways will be protected with strong encryption and verification methods.  
+**Why it matters:** Ensures the safety of financial transactions between guests and hosts.
+
+### 7. Logging & Monitoring
+API requests will be logged and monitored for suspicious activity. Al
+
+
+
+
+
+## CI/CD Pipeline
+
+Continuous Integration and Continuous Deployment (CI/CD) are practices that automate the process of building, testing, and deploying code. A CI/CD pipeline ensures that every code change is automatically integrated, tested, and delivered to production in a reliable and efficient way.
+
+### Why CI/CD is Important
+- **Faster Development**: Automates repetitive tasks such as building and testing, which speeds up the development cycle.  
+- **Improved Quality**: Ensures that all code is tested before merging, reducing bugs and errors in production.  
+- **Consistency**: Provides a standardized process for deployments, minimizing human errors.  
+- **Rapid Feedback**: Developers get quick feedback if their code fails tests, making debugging easier.  
+
+### Tools Used in the Project
+- **GitHub Actions**: Automates workflows such as running tests, linting code, and deploying the application.  
+- **Docker**: Packages the application and its dependencies into containers, ensuring consistency across environments (development, staging, production).  
+- **Nginx**: Used in deployment to serve the application and handle load balancing.  
+- **(Optional) AWS / Heroku**: Cloud platforms for hosting and deploying the application in production.  
+
+By combining these tools, our CI/CD pipeline will allow seamless collaboration, quick testing, and reliable delivery of new features to users.
+
+
 
 # airbnb-clone-project
 Set up your GitHub repository for the AirBnB Clone project
